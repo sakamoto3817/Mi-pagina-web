@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shin Megami Tensei</title>
+
+    <style>
+
+        /* =========================
+           CONFIGURACIÓN GENERAL
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #080808;
+            color: white;
+        }
+
+
+        /* =========================
+           ENCABEZADO
+        ========================= */
+
+        header {
+            height: 90px;
+            background: #050505;
+            border-bottom: 2px solid #b40000;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 50px;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            color: #d60000;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+
+            margin-left: 30px;
+
+            font-size: 16px;
+
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #d60000;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 600px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    rgba(0,0,0,.65),
+                    rgba(0,0,0,.9)
+                ),
+                url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1600&q=80");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 30px;
+        }
+
+        .hero h1 {
+            font-size: 70px;
+
+            color: #d40000;
+
+            text-shadow:
+                0 0 10px #000,
+                0 0 30px #000;
+
+            letter-spacing: 5px;
+        }
+
+        .hero h2 {
+            font-size: 25px;
+
+            margin: 15px 0;
+
+            letter-spacing: 5px;
+        }
+
+        .hero p {
+            color: #ccc;
+
+            line-height: 1.7;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* =========================
+           BOTONES
+        ========================= */
+
+        .button {
+            display: inline-block;
+
+            padding: 14px 30px;
+
+            background: #a90000;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            border: 1px solid #ff3333;
+
+            transition: .3s;
+        }
+
+        .button:hover {
+            background: #e00000;
+
+            box-shadow:
+                0 0 10px #d00000,
+                0 0 30px #d00000;
+        }
+
+
+        /* =========================
+           SECCIONES
+        ========================= */
+
+        section {
+            padding: 70px 10%;
+        }
+
+        .title {
+            text-align: center;
+
+            font-size: 35px;
+
+            margin-bottom: 45px;
+
+            color: #d00000;
+
+            letter-spacing: 2px;
+        }
+
+
+        /* =========================
+           JUEGOS
+        ========================= */
+
+        .games {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(250px, 1fr));
+
+            gap: 25px;
+        }
+
+        .game {
+            background: #111;
+
+            border: 1px solid #333;
+
+            padding: 25px;
+
+            transition: .3s;
+        }
+
+        .game:hover {
+            transform: translateY(-8px);
+
+            border-color: #c00000;
+
+            box-shadow:
+                0 0 20px rgba(190,0,0,.3);
+        }
+
+        .game h3 {
+            color: #e00000;
+
+            margin-bottom: 15px;
+
+            font-size: 22px;
+        }
+
+        .game p {
+            color: #aaa;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           DEMONIOS
+        ========================= */
+
+        .demons {
+            background: #0d0d0d;
+        }
+
+        .demon-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 25px;
+        }
+
+        .demon {
+            background: #111;
+
+            border: 1px solid #292929;
+
+            overflow: hidden;
+
+            transition: .3s;
+        }
+
+        .demon:hover {
+            transform: translateY(-10px);
+
+            border-color: #c00000;
+
+            box-shadow:
+                0 0 15px rgba(190,0,0,.4),
+                0 0 30px rgba(190,0,0,.15);
+        }
+
+        .demon img {
+            width: 100%;
+
+            height: 330px;
+
+            object-fit: contain;
+
+            display: block;
+
+            background: #080808;
+
+            padding: 15px;
+        }
+
+        .demon-info {
+            padding: 20px;
+
+            border-top: 1px solid #292929;
+        }
+
+        .demon h3 {
+            color: #e00000;
+
+            font-size: 23px;
+
+            margin-bottom: 10px;
+
+            letter-spacing: 2px;
+        }
+
+        .demon p {
+            color: #999;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           SOBRE LA SAGA
+        ========================= */
+
+        .about {
+            max-width: 900px;
+
+            margin: auto;
+
+            text-align: center;
+
+            line-height: 1.8;
+
+            color: #bbb;
+
+            font-size: 18px;
+        }
+
+        .about p {
+            margin-bottom: 20px;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            text-align: center;
+
+            padding: 35px;
+
+            background: #030303;
+
+            border-top: 1px solid #222;
+
+            color: #666;
+        }
+
+        footer span {
+            color: #c00000;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1000px) {
+
+            .demon-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 55px;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 0 20px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero h2 {
+                font-size: 18px;
+            }
+
+            section {
+                padding: 50px 7%;
+            }
+
+        }
+
+
+        @media (max-width: 550px) {
+
+            .demon-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .demon img {
+                height: 350px;
+            }
+
+            .title {
+                font-size: 28px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         ENCABEZADO
+    ========================= -->
+
+    <header>
+
+        <div class="logo">
+            SMT
+        </div>
+
+        <nav>
+
+            <a href="#inicio">
+                Inicio
+            </a>
+
+            <a href="#juegos">
+                Juegos
+            </a>
+
+            <a href="#demonios">
+                Demonios
+            </a>
+
+            <a href="#saga">
+                Saga
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =========================
+         INICIO
+    ========================= -->
+
+    <section class="hero" id="inicio">
+
+        <div class="hero-content">
+
+            <h1>
+                SHIN MEGAMI TENSEI
+            </h1>
+
+            <h2>
+                THE WORLD AFTER THE END
+            </h2>
+
+            <p>
+                Dioses, demonios, humanos y un mundo al borde
+                de la destrucción. Explora una de las sagas más
+                oscuras del RPG japonés y decide qué futuro
+                merece sobrevivir.
+            </p>
+
+            <a href="#juegos" class="button">
+                EXPLORAR LA SAGA
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         JUEGOS
+    ========================= -->
+
+    <section id="juegos">
+
+        <h2 class="title">
+            JUEGOS DESTACADOS
+        </h2>
+
+
+        <div class="games">
+
+
+            <div class="game">
+
+                <h3>
+                    Shin Megami Tensei III
+                </h3>
+
+                <p>
+                    Tokio ha sido destruido y el mundo se encuentra
+                    transformado por la Concepción. Sobrevive en un
+                    mundo habitado por demonios.
+                </p>
+
+            </div>
+
+
+            <div class="game">
+
+                <h3>
+                    Shin Megami Tensei IV
+                </h3>
+
+                <p>
+                    Conviértete en un Samurai y descubre los secretos
+                    detrás de un conflicto entre humanos, demonios
+                    y fuerzas divinas.
+                </p>
+
+            </div>
+
+
+            <div class="game">
+
+                <h3>
+                    Shin Megami Tensei V
+                </h3>
+
+                <p>
+                    Explora un Tokio devastado mientras utilizas
+                    demonios y tomas decisiones que determinarán
+                    el destino del mundo.
+                </p>
+
+            </div>
+
+
+            <div class="game">
+
+                <h3>
+                    Shin Megami Tensei V: Vengeance
+                </h3>
+
+                <p>
+                    Una historia expandida con nuevos personajes,
+                    demonios, zonas y una nueva ruta narrativa.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         DEMONIOS
+    ========================= -->
+
+    <section class="demons" id="demonios">
+
+        <h2 class="title">
+            COMPENDIO DEMONÍACO
+        </h2>
+
+
+        <div class="demon-grid">
+
+
+            <!-- THOR -->
+
+            <div class="demon">
+
+                <img
+                    src="data:image/jpeg;base64,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"
+                    alt="Thor - Shin Megami Tensei"
+                >
+
+                <div class="demon-info">
+
+                    <h3>
+                        THOR
+                    </h3>
+
+                    <p>
+                        Deidad nórdica del trueno y poderoso
+                        demonio de la serie Shin Megami Tensei.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- MATADOR -->
+
+            <div class="demon">
+
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQGGw7sc9txPlluxniOZ0YwfFVeYk6f9CMu4xCR3XXQ&s=10"
+                    alt="Matador - Shin Megami Tensei"
+                >
+
+                <div class="demon-info">
+
+                    <h3>
+                        MATADOR
+                    </h3>
+
+                    <p>
+                        Uno de los Fiends más reconocibles de
+                        Shin Megami Tensei III: Nocturne.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- YHVH -->
+
+            <div class="demon">
+
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLsIS9MOpKGTvfFXK0tHlqsCMtfPVgClHDiosj8V_kWw&s=10"
+                    alt="YHVH - Shin Megami Tensei"
+                >
+
+                <div class="demon-info">
+
+                    <h3>
+                        YHVH
+                    </h3>
+
+                    <p>
+                        Una de las grandes fuerzas divinas
+                        presentes en diferentes entregas de la saga.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- DEMI-FIEND -->
+
+            <div class="demon">
+
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4LycUfc32Ihs-HJlz5NlT3QKyP_WwzVxcITYvgeWitw&s=10"
+                    alt="Demi-fiend - Shin Megami Tensei III"
+                >
+
+                <div class="demon-info">
+
+                    <h3>
+                        DEMI-FIEND
+                    </h3>
+
+                    <p>
+                        Protagonista de Shin Megami Tensei III:
+                        Nocturne, mitad humano y mitad demonio.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SOBRE LA SAGA
+    ========================= -->
+
+    <section id="saga">
+
+        <h2 class="title">
+            SOBRE LA SAGA
+        </h2>
+
+
+        <div class="about">
+
+            <p>
+                Shin Megami Tensei es una serie de RPG desarrollada
+                por Atlus. Sus historias suelen presentar mundos
+                devastados, conflictos entre distintas fuerzas
+                sobrenaturales y decisiones que pueden cambiar
+                el destino de la humanidad.
+            </p>
+
+
+            <p>
+                Una de sus características más reconocibles es la
+                posibilidad de negociar y fusionar demonios para
+                crear un equipo capaz de enfrentarse a las amenazas
+                del mundo.
+            </p>
+
+
+            <a href="#inicio" class="button">
+                VOLVER AL INICIO
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PIE DE PÁGINA
+    ========================= -->
+
+    <footer>
+
+        Fan Page de
+        <span>
+            Shin Megami Tensei
+        </span>
+
+        · Proyecto HTML
+
+    </footer>
+
+
+</body>
+</html>
